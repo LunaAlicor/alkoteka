@@ -7,7 +7,9 @@ from bs4 import BeautifulSoup
 
 
 class AlkotekaSpider(scrapy.Spider):
+
     name = "alkoteka_async"
+    PROXY = "http://79.110.201.235:8081"
 
     START_URLS = [
         "https://alkoteka.com/catalog/slaboalkogolnye-napitki-2",
@@ -54,7 +56,10 @@ class AlkotekaSpider(scrapy.Spider):
                     yield scrapy.Request(
                         url,
                         cookies=self.COOKIES,
-                        meta={"playwright": True, "playwright_include_page": True, "region": "Краснодар"},
+                        meta={"playwright": True, "playwright_include_page": True,
+                              "region": "Краснодар",
+                              "proxy": self.PROXY,
+                              },
                         callback=self.parse_product,
                     )
         else:
@@ -62,7 +67,10 @@ class AlkotekaSpider(scrapy.Spider):
                 yield scrapy.Request(
                     url,
                     cookies=self.COOKIES,
-                    meta={"playwright": True, "playwright_include_page": True, "region": "Краснодар"},
+                    meta={"playwright": True, "playwright_include_page": True,
+                          "region": "Краснодар",
+                          "proxy": self.PROXY,
+                          },
                     callback=self.parse_listing,
                 )
 
@@ -89,7 +97,10 @@ class AlkotekaSpider(scrapy.Spider):
             yield scrapy.Request(
                 link,
                 cookies=self.COOKIES,
-                meta={"playwright": True, "playwright_include_page": True, "region": "Краснодар"},
+                meta={"playwright": True, "playwright_include_page": True,
+                      "region": "Краснодар",
+                      "proxy": self.PROXY,
+                      },
                 callback=self.parse_product,
             )
 
