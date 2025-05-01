@@ -1,0 +1,3 @@
+scrapy==2.10.1
+scrapy-playwright==0.0.30
+Twisted<23.8
